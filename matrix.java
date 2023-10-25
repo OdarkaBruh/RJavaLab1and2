@@ -17,7 +17,7 @@ public class matrix {
 	public static int standartBorder = main.StandartBorder;
 	
 	//Створення матриць
-	public static float[][] tMatrix = new float [4][4];
+	public static float[][] TranspositedMatrix = new float [4][4];
 	public static float[][] startingMatrix = 
 		 { { 1, 2, 3, 4 }, 
 		   { 3, 4, 5, 7 },
@@ -25,7 +25,6 @@ public class matrix {
 		   { (float) 13.23, 23, -5, (float) -5.6}};
 	 
 	 public static void frame() {
-		 
 		 //Оформлення
 		 createLabel("Початкова Матриця: ", 0);
 		 createLabel("Транспортована Матриця: ", 1);
@@ -36,9 +35,9 @@ public class matrix {
 		 panel2.setBounds(standartBorder*3+250+200, standartBorder*3, 200, 200);
 		 panel2.setLayout(new GridLayout(4,4));
 		 
-		 createTF(startingMatrix, panel1);
-		 matrixT(tMatrix,startingMatrix);
-		 createTF(tMatrix,panel2);
+		 createJTextField(startingMatrix, panel1);
+		 matrixTransposition(TranspositedMatrix,startingMatrix);
+		 createJTextField(TranspositedMatrix,panel2);
 		 task();
 		 
 		 main.panelLab2.add(panel1);
@@ -65,7 +64,7 @@ public class matrix {
 	 
 	 //JTextField в парі з GridLayout в panel1 і panel2 використано для відображення саме ЗНАЧЕННЯ матриць 
 	 //(тобто кожна ячейка-JTextField тримає одне число певного рядку і колонки)
-	 private static void createTF(float[][] matrix, JPanel panel12) {
+	 private static void createJTextField(float[][] matrix, JPanel panel12) {
 		 for (int i = 0; i <4; i++) {
 			 for (int j = 0; j<4; j++) {
 				 JTextField tf = new JTextField();
@@ -78,7 +77,7 @@ public class matrix {
 	}
 	
 	//Транспонування матриці
-	private static void matrixT(float[][] m1, float[][] m2) {
+	private static void matrixTransposition(float[][] m1, float[][] m2) {
 		for (int i = 0; i <4; i++) {
 			for (int j = 0; j<4; j++) {
 				m1[i][j] = m2[j][i];
@@ -100,11 +99,9 @@ public class matrix {
 		int x = 0;
 		
 		//par - чи парне число зараз буде
-		boolean par = false;
-		
 		for (int i = 0; i <4; i++) {
 			//Ставимо парність як false, бо новий рядок.
-			par = false;
+			boolean par = false;
 			max = startingMatrix[i][1];
 			min = startingMatrix[i][0];
 			for (int j = 0; j<4; j++) {
